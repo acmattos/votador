@@ -1,0 +1,22 @@
+<h3>Votar em Recursos</h3>
+<div uib-alert class="alert alert-warning" 
+     id="mensagem" ng-if="vm.mensagem">
+  {{vm.mensagem}}
+</div>
+<table class="table">
+<thead>
+  <tr>
+    <th scope="col">Recurso</th>
+    <th scope="col">Comentário</th>
+    <th scope="col"></th>
+  </tr>
+</thead>
+<tbody>
+  <tr ng-repeat="recurso in vm.recursos">
+    <th scope="row">{{recurso.descricao}}</th>
+    <td><input type="text" ng-model="recurso.comentario"></td>
+    <td><button class="btn btn-primary" 
+      ng-click="vm.votar(recurso.id, recurso.comentario)" 
+      ng-disabled="!recurso.comentario">Votar</button></td>
+  </tr> 
+</tbody>

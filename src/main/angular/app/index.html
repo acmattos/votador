@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="votador.fe" lang="pt" ng-strict-di>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Alterdata - Votador</title>
+  </head>
+  <body ng-cloak ng-controller="indexController as vm">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light"
+           ng-show="vm.show">
+        <a class="navbar-brand">Votador</a>
+           <a class="navbar-brand" ui-sref="recursos" 
+              ui-sref-opts="{reload:true}">Votar em Recursos</a>
+          <a class="navbar-brand" ui-sref="resultados" 
+             ui-sref-opts="{reload:true}">Resultados das Eleições</a>
+          <a class="navbar-brand" ui-sref="participantes" 
+             ui-sref-opts="{reload:true}">Acompanhar Votação</a>
+          <a class="navbar-brand" href="#" ng-click="vm.logout()">
+              Sair
+          </a>
+      </nav>  
+      <ui-view></ui-view>
+     </div>  
+  </body>
+</html>

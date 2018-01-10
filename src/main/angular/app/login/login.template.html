@@ -1,0 +1,24 @@
+<div id="login">
+  <h3>Área Restrita</h3>
+<div uib-alert class="alert alert-danger" 
+     id="mensagem" ng-if="vm.error.status">
+  {{vm.error.status}} - {{vm.error.message}}
+  </div>
+<form>
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input id="email" type="text" class="form-control" aria-label="Large" 
+            aria-describedby="inputGroup-sizing-sm" 
+            ng-model="vm.funcionario.email">
+</div>
+  <div class="form-group">
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" class="form-control" aria-label="Large" 
+            aria-describedby="inputGroup-sizing-sm" 
+            ng-model="vm.funcionario.senha">
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit" 
+            ng-click="vm.login()">Autenticar</button>
+  </div>
+</form>

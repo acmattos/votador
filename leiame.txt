@@ -1,0 +1,488 @@
+================================================================================
+|          _____  .__   __                   .___       __                     |
+|         /  _  \ |  |_/  |_  ___________  __| _/____ _/  |______              |
+|        /  /_\  \|  |\   __\/ __ \_  __ \/ __ |\__  \\   __\__  \             |
+|       /    |    \  |_|  | \  ___/|  | \/ /_/ | / __ \|  |  / __ \_           |
+|       \____|__  /____/__|  \___  >__|  \____ |(____  /__| (____  /           |
+|               \/               \/           \/     \/          \/            |
+|            ____   ____     __              .___                              |
+|            \   \ /   /____/  |______     __| _/___________                   | 
+|             \   Y   /  _ \   __\__  \   / __ |/  _ \_  __ \                  |
+|              \     (  <_> )  |  / __ \_/ /_/ (  <_> )  | \/                  |
+|               \___/ \____/|__| (____  /\____ |\____/|__|                     |
+|                                     \/      \/                               |
+================================================================================
+
+A) AMBIENTE DE DESENVOLVIMENTO:
+===============================
+
+1) Requisitos de software:
+
+- JDK 1.8 ou superior;
+- Maven 3 ou superior;
+- PostgreSQL 9.6 ou superior;
+- nodeJS 6.11 ou superior;
+- NPM 3.10 ou superior.
+
+2) Bibliotecas Principais:
+
+* Back-End (Java)
+
+- hamcrest-core
+- hibernate-core
+- hibernate-entitymanager
+- hibernate-validator
+- json-path
+- junit
+- lombok
+- mockito-core
+- postgresql
+- spring-boot
+- spring-core
+- spring-web
+- spring-aop
+- spring-security-config
+- spring-security-oauth2
+- spring-security-jwt
+- spring-jdbc
+- spring-data-jpa
+- spring-boot-test
+- springfox-swagger2
+- springfox-swagger-ui
+- tomcat-embed-core
+- tomcat-jdbc
+
+* Front-End (Javscript)
+
+- angular
+- angular-local-storage
+- angular-translate
+- angular-ui-bootstrap
+- angular-ui-router
+- babel-core
+- babel-loader
+- babel-preset-env
+- babel-preset-stage-0
+- base-href-webpack-plugin
+- bootstrap
+- clean-webpack-plugin
+- copy-webpack-plugin
+- cross-env
+- css-loader
+- file-loader
+- html-loader
+- html-webpack-plugin
+- http-server
+- jquery
+- jshint
+- jshint-loader
+- jwt-decode
+- optimize-css-assets-webpack-plugin
+- postcss
+- postcss-loader
+- rimraf
+- style-loader
+- uglifyjs-webpack-plugin
+- url-loader
+- webpack
+- webpack-dev-server
+
+3) Preparando o ambiente de trabalho:
+
+- Assegurar-se de que já possui as ferramentas JDK, Maven, PostgreSQL, nodeJS e
+  NPM instaladas e funcionando adequadamente (ver apêndice, no final da 
+  documentação, para informações sobre instalação e configuração do nodeJS e 
+  NPM).
+- Descompactar o arquivo 'votador.zip' em um diretório de sua preferência.
+- Pelo prompt de comando, acessar o diretório do projeto:
+
+  > cd c:\<RAIZ>\votador
+
+- Abrir o arquivo 'c:\<RAIZ>\votador\src\main\resources\application.properties' 
+  e ajustar as propriedades a seguir (campos entre '<>'):
+
+  spring.datasource.url=jdbc:postgresql://<NOME_OU_IP_DO SERVIDOR_DO_BANCO>:5432/votador
+  spring.datasource.username=<USUARIO_DO_BANCO>
+  spring.datasource.password=<SENHA_DO_USUARIO>
+
+- Na console do PostgreSQL, criar o banco de dados da aplicação:
+
+  CREATE DATABASE votador
+    WITH OWNER = postgres
+         ENCODING = 'UTF8'
+         TABLESPACE = pg_default
+         LC_COLLATE = 'Portuguese_Brazil.1252'
+         LC_CTYPE = 'Portuguese_Brazil.1252'
+         CONNECTION LIMIT = -1;
+
+- Dentro do diretório do projeto ('c:\<RAIZ>\votador'), digitar:
+
+  > mvn clean compile spring-boot:run
+
+- Este processo baixará todas as dependências do projeto Back-End, compilará o 
+  código, criará as tabelas, inserirá os as informações iniciais e colocará a 
+  aplicação em pleno funcionamento.
+
+- Para ver as APIs REST disponibilizadas pelo Back-End, acesse:
+
+  http://localhost:8080/swagger-ui.html
+
+- A interface permite navegar pelas interfaces, possibilitando utilizar os 
+  endpoints REST, em sua totalidade.
+
+- Abrir nova console de comando.
+- Pelo prompt de comando, acessar o seguinte diretório do projeto:
+  
+  > cd c:\<RAIZ>\votador\src\main\angular
+
+- Dentro do diretório, digitar:
+
+  > npm install
+
+- Este processo baixará todas as dependências do projeto Front-End.
+- Quando terminar, digitar:
+ 
+  > npm run serve
+
+- Este comando colocará a aplicação Front-End em funcionamento. Uma janela do 
+  seu navegador padrão será aberta, carregando a aplicação Front-End. 
+
+- Estes passos permitem que você possa continuar desenvolvendo os projetos ou 
+  comece a acessar as funcionalidades providas pelo Votador.
+
+4) Gerando os Artefatos para Instalação (Deploy):
+
+- O votador tem dois artefatos para instalação: Back-End e Front-End.
+
+* Gerando o Back-End:
+- Para gerar a instalação do Back-End, abra uma console de comandos e acesse:
+
+  > cd c:\<RAIZ>\votador
+
+- Dentro do diretório, digite:
+
+  mvn clean compile install
+
+- Após o término, você poderá obter o arquivo JAR executável do módulo Back-End.
+  Basta acessar:
+
+  > cd c:\<RAIZ>\votador\target
+
+- Lá você encontrará o arquivo executável 'votador-1.0.0.jar'. Para executá-lo,
+  digite:
+
+  > java -jar votador-1.0.0.jar
+
+- É importante ressaltar que a aplicação espera requisições através da porta 
+  8080. Portanto, certifique-se de que a porta esteja disponível antes de rodar 
+  a aplicação.
+- Alternativamente, pode-se configurar a porta em uso pela aplicação, acessando 
+  o arquivo 'c:\<RAIZ>\votador\src\main\resources\application.properties' e 
+  modificando a propriedade abaixo:
+
+  server.port=<NOVA_PORTA_AQUI>
+
+  Após esta modificação, uma nova instalação deve ser gerada.
+
+- IMPORTANTE: se a porta monitorada pelo Back-End for alterada, não se esqueça 
+  de modificar a rota configurada para o Webpack DevServer Proxy rotar 
+  corretamente as requisições para o servidor. Para isto, abra os arquivos 
+  'C:\<RAIZ>\votador\src\main\angular\config\webpack.config.development.js' e
+  'C:\<RAIZ>\votador\src\main\angular\config\webpack.config.production.js', 
+  busque pela seguinte linha:
+
+  const OAUTH_SERVER_URL_LOCAL = 'http://localhost:8080'
+
+  Modifique a porta (8080) para a nova porta que tenha definido para o Back-End.
+  Esta modificação obriga o encerramento do DevServer e o seu reinício, para que 
+  esta configuração tenha efeito.
+  Outra modificação que pode ser feita é a modificação da porta que o DevServer
+  escuta. Neste caso, busque a linha:
+
+  port: 80,
+
+  que fica nos mesmos arquivos recém-abertos. Modifique para a nova porta, salve 
+  o arquivo, pare o devServer (CRTL + C) e reinicie-o.
+
+- Vale ressaltar que, para evitar a criação e destruição do banco de dados,
+  a cada vez que se executa o arquivo JAR da aplicação, você deve remover, 
+  do diretório 'c:\<RAIZ>\votador\src\main\resources\' os arquivos 'data.sql' e 
+  'schema.sql' antes de gerar o JAR executável. Em uma próxima versão este 
+  processo será feito, de forma automática, pelo gerador de executáveis.
+
+* Gerando o Front-End:
+
+- Para gerar a instalação do Front-End, abra uma console de comandos e acesse:
+
+  > cd c:\<RAIZ>\votador\src\main\angular
+
+- Dentro do diretório, digite:
+
+  > npm run build 
+
+  Para gerar os artefatos para ambiente de desenvolvimento. 
+- Para gerar artefatos para ambiente de homologação/produção, digite:
+
+  > npm run buildp
+
+- A diferença entre os comandos se dá na produção de arquivos minificados (
+  de tamanho significativamente reduzido, próprios para serem consumidos pelos 
+  clientes finais), no caso da diretiva 'buildp', e geração de arquivos legíveis 
+  aos olhos humanos, no caso da diretiva 'build' (arquivos não minificados e com 
+  muitas semelhanças com o código de desenvolvimento).
+
+- O diretório 'c:\<RAIZ>\votador\src\main\angular\dist-dev' contém os arquivos 
+  destinados ao ambiente de desenvolvimento.
+
+- O diretório 'c:\<RAIZ>\votador\src\main\angular\dist-prod' contém os arquivos 
+  destinados ao ambiente de homologação/produção.
+  
+- Estes diretórios são sempre recriados ao serem invocadas as diretivas 'build'
+  e 'buildp'.
+
+- Para disponibilizar o Front-End para os clientes, basta copiar os arquivos do
+  diretório 'dist-dev' ou 'dist-prod' (dependendo da diretiva executada 
+  previamente) e disponibilizá-los através de  um servidor HTTP (Apache, Nginx, 
+  IIS).
+
+- Alternativamente, pode-se disponibilizar os mesmos arquivos, utilizando-se o 
+  servidor Webpack DevServer, utilizando as seguintes diretivas:
+
+  > npm run serve
+
+  ou
+
+  > npm run servep  
+  
+  que levantam um servidor HTTP disponibilizado pelo Webpack, com as versões de 
+  artefato próprias para os ambientes já mencionados anteriormente. Neste caso, 
+  os arquivos físicos não existem pois são gerados em memória e manipulados 
+  internamente pelo DevServer.
+
+- Para mais informações sobre as demais diretivas existentes, abra o arquivo
+  'c:\<RAIZ>\votador\src\main\angular\README.md'.
+
+B) ARQUITETURA DA APLICAÇÃO:
+============================
+
+A aplicação foi concebida com dois módulos principais: Front-End e Back-End.
+
+O Back-End (BE) foi desenvolvido utilizando a stack Java. Em particular, o BE é 
+baseado em Spring Boot. Este framework provê um conjunto de ferramentas que 
+permitem a agregação de mais funcionalidades, de forma menos traumática para o 
+processo de desenvolvimento. No projeto do BE, foram incorporadas ferramentas de 
+acesso a dados, geração automática de código acesórios (getters e setters), 
+autenticação e autorização de usuários baseado em OAuth2 e utilizando tokens 
+JWT, disponibilização automática de endpoints REST, documentação das interfaces 
+REST e de geração de testes de código fonte.
+
+O Front-End (FE) foi desenvolvido utilizando a stack Javascript/HTML5/CSS3. Em 
+particular, o FE é baseado em AngularJS e foi construído seguindo o padrão  
+Single Page Aplication, o que facilita o seu uso em diversos tipos de  
+dispositivos, principalmente os móveis. O uso de HTML5 e CSS3 (via Bootstrap)  
+permite a criação de clientes ricos, responsivos e com uma boa gama de recursos.
+No projeto do FE, foram utilizadas ferramentas de geração de aplicações em 
+Javascript, transformação de código para suporte multi-navegadores, 
+transformação de layout, geração de builds e gerencimanto de bibliotecas de  
+integração, além de um servidor HTTP que permite a execução imediata dos códigos
+criados.
+
+A escolha das tecnologias dos dois módulos deve-se a uma perfeita união de  
+aspectos complementares entre as stacks escolhidas. Java, através do Spring, 
+fornece soluções robustas para uso no back-end, com fácil acoplamento de novos 
+módulos, permitindo extensibilidade de recursos providos pelo BE. 
+Javascript está presente desde os primórdios da web. É uma ferramenta bem 
+conhecida e, com o advento do AngularJS (assim como de outros frameworks 
+similares), torna o processo de criação de interfaces ricas muito produtivo. 
+Javascript manipula com extrema facilidade e rapidez, objetos JSon, o que torna 
+a comunicação com endpoints REST extremamente fácil e poderosa. Além disto, o 
+Angular cuida de diversos aspectos de segurança de entrada e saída de dados,  
+como escape de caracteres especiais (evitando ataques de  SQL Injection, Script 
+Injection), além de prover diversas funcionalidades, de forma automática, 
+bastando apenas o desenvolvedor ativar seu uso no momento que desenvolve suas   
+soluções (por exemplo, tabelas com filtro dinâmico de resultados, sem qualquer 
+chamadas extras para o servidor).
+
+O BE foi modularizado baseando-se no padrão Domain Driven Design. Cada módulo 
+agrega as funcionalidades de seu domínio. As classe visam seguir os conceitos de 
+estereótipo do DDD, que inclusive são reforçados pelo framework Spring,  
+permitindo marcar classes como entidades, serviços, repositórios. Agora, uma  
+breve explicação sobre os módulos:
+
+- br.com.alterdata.votador.autorizacao: este módulo cuida da autenticação e 
+  autorização dos usuários da aplicação. Seu trabalho é cuidar do fluxo de 
+  autenticação e autorização, gerido pelo Spring Security, provendo tokens de 
+  acesso e revalidando-os quando solicitado.
+
+- br.com.alterdata.votador.eleicao: este módulo disponibiliza as funcionalidades   
+  relativas às eleições. É possível votar em recursos, acompanhar resultados das 
+  eleições e ver quem votou em qual recurso, através de seus serviços.
+
+- br.com.alterdata.votador.funcionario: este módulo disponibiliza as 
+  funcionalidades relativas aos funcionários. Criação, edição, remoção e busca 
+  estão entre os seus serviços. Com isto, o sistema de Departamento Pessoal 
+  poderá manipular as informações de funcionários. 
+
+- br.com.alterdata.votador.recurso: este módulo disponibiliza as 
+  funcionalidades relativas aos recursos que precisam ser eleitos pelos 
+  funcionários e que depois serão devidamente tratados pela equipe de 
+  desenvolvimento. Criação, edição, remoção e busca estão entre os seus 
+  serviços. Com isto, o sistema de Controle de Produção poderá manipular as 
+  informações de recursos.
+
+- br.com.alterdata.votador.util: modulo que disponibiliza algumas 
+  funcionalidades úteis ao sistema, em geral.
+
+O FE foi modularizado baseando-se no padrão de desenvolvimento de aplicações 
+AngularJS. Nele, organizamos os componentes em módulos, separando cada 
+estereótipo em seu próprio arquivo. Com isto promove-se um código mais simples e 
+conciso, facilitando o entendimento e manutenção. Outra diretriz seguida foi o 
+desenvolvimento Single Page Aplication. SPA é um novo modelo de desenvolvimento 
+de aplicações Web e mobile que vem ganhando destaque em grandes empresas como 
+Microsoft, Google, Twitter, Facebook. Nele, o cliente torna-se mais rico e 
+poderoso, tirando responsabilidade do BE em prover lógica de produção de 
+interface. O cliente assume totalmente esta responsabilidade. Outra 
+característica positiva é o menor consumo de banda pois a comunicação agora 
+envolve apenas o tráfego de dados JSon, na maior parte do tempo. Agora, uma breve 
+explicação sobre os módulos:
+
+- app/eleicao/participantes: este módulo permite acompanhar as eleições, vendo 
+  quais participantes votaram em quais recursos, quando votaram e o que 
+  consideram importante para justificar o seu voto.
+
+- app/eleicao/resultados: este módulo permite acompanhar os resultados das 
+  eleições. Os recursos são ordenados dos mais votados aos menos, acompanhados 
+  pelo total de votos que obtiveram até o momento.
+
+- app/eleicao/recursos: este módulo exibe apenas os recursos que o participante 
+  das eleições poderá votar. Ele permite apenas um voto por recurso e condiciona
+  o voto ao preenchimento do comentário.  
+
+- app/login: este módulo cuida do processo de login do funcionário. Graças a ele
+  o usuário se loga na aplicação ou, mediante login prévio e token de acesso não 
+  expirado, efetua o login automático do funcionário, quando este acessa a url 
+  padrão da aplicação (http://localhost/).
+
+- app/oauth2: este módulo cuida da manipulação dos tokens de acesso e refresh 
+  providos pela especificação OAuth2. Cada componente de código tem seu papel,
+  promovendo o armazenamento dos tokens, comunicação com o servidor de 
+  autenticação, comunicação com servidor de recursos, obtenção do usuário 
+  armazenado no token OAuth2, interceptação das requisições para passagem do 
+  token durante a comunicação com o servidor. 
+
+- app: este módulo contém os arquivos de inicialização da aplicação SPA Angular.
+
+- config: este módulo contém configurações globais da aplicação e as 
+  configurações particulares de execução, empacotamento de arquivos, gestão de 
+  dependências e execução de servidor HTTP próprio, capaz de tornar a aplicação 
+  alcançável a qualquer dispositivo que seja capaz de acessar a mesma rede na 
+  qual este servidor HTTP roda (Webpack e Webpack DevServer).  
+
+- node_modules: este módulo é criado quando o comando 'npm install' é executado.
+  Nele, todas as dependências da aplicação são armazenadas e gerenciadas com o 
+  uso do Webpack.
+
+C) ACESSANDO O VOTADOR:
+=======================
+
+- A forma mais rápida de acessar as funcionalidades do Votador é a seguinte (
+  supondo que você já seguiu as instruções anteriores, realizou todas as 
+  preparações do ambiente e sabe em qual local deve executar cada comando):
+
+  > mvn clean compile spring-boot:run (para executar o Back-End)
+
+  > npm run serve (para executar o Front-End)
+
+- Uma janela do navegador padrão abrirá. Nela, a tela de login será exibida. 
+  Para acessar, utilize um dos funcionários previamente cadastrados:
+
+Email: jorge.pessoal@alterdata.com.br
+Senha: jorge
+
+Email: ana.pessoal@alterdata.com.br
+Senha: ana
+
+Email: paulo.producao@alterdata.com.br
+Senha: paulo
+
+Email: isabel.producao@alterdata.com.br
+Senha: isabel
+
+Email: carlos.financeiro@alterdata.com.br
+Senha: carlos
+
+Email: rita.financeiro@alterdata.com.br
+Senha: rita
+
+Email: angelo.comercial@alterdata.com.br
+Senha: angelo
+
+Email: maria.comercial@alterdata.com.br
+Senha: maria
+
+Email: bruno.desenvolvimento@alterdata.com.br
+Senha: bruno
+
+Email: julia.desenvolvimento@alterdata.com.br
+Senha: julia
+
+- Se nada ocorrer de errado (Back-end fora do ar, ou erro de digitação de 
+  email/senha), você acessará a tela 'Votar em Recursos'. Nela, serão exibidos 
+  apenas os recursos que o funcionário logado ainda não votou. A tela permite 
+  o voto, somente após o funcionário fornecer um comentário para este voto. Ao 
+  votar em todos recursos disponíveis, um aviso surgirá, informando o fato.
+
+- Pelo menu será possível ver a tela 'Resultados das Eleições', que mostra as  
+  parciais do pleito. Nela, é possível ver os recursos cadastrados, ordenados 
+  pelo total de votos que receberam. Caso não existam recursos cadastrados, um  
+  aviso será dado, informando o fato.
+
+- Por último, pode ser acessada a tela 'Acompanhar Votação'. Nela vemos quem
+  votou em qual recurso, quando foi realizada esta votação e o que comentaram ao 
+  votar em determinado recurso.
+
+- Se desejar sair, basta clicar no link próprio do menu. Ele fará o processo de 
+  logout e fará a tela de login surgir novamente. Se apenas fechar o navegador, 
+  poderá ser autenticado e autorizado a entrar automaticamente se o seu token de
+  acesso ainda for válido.
+
+- Vale resaltar, que a autenticação e autorização de uso da aplicação via token 
+  só está disponível para o Front-End. Na próxima versão, o acesso ao 
+  Back-End também validará o token de acesso antes de liberar o funcionamento  
+  dos endpoints REST.
+
+D) ACESSANDO AS APIs REST UTILIZANDO A INTERFACE SWAGGER:
+=========================================================
+
+- Na janela do navegador, acesse: 
+
+  > http://localhost:8080/swagger-ui.html
+
+- A interface exibe os controladores responsáveis pelos endpoints da API REST. 
+  Através dela, podemos realizar as operações disponibilizadas pelos 
+  controladores de forma muito simples. A interface (em inglês) é bem intuitiva
+  e auto explicativa, mostrando o modelo de requisições e formato do modelo de 
+  objetos (enviados em requsição e/ou recebidos como resposta).
+
+
+E) APÊNDICE:
+============
+
+1) Instalando o nodeJS:
+
+- Acessar:  http://nodejs.org 
+
+- Baixar a versão LTS (mais estável)
+
+- Digitar na console de comandos: node -v
+
+- Digitar na console de comandos: npm -v
+
+- Se você pôde ver as versões do Node e NPM significa que a instalação 
+  ocorreu sem problemas. Caso os comandos não sejam encontrados, certifique-se 
+  que o PATH foi configurado adequadamente com o diretório de instalação do 
+  nodeJS.
+
+- Crie a variável de ambiente NODE_ENV e atribua a ela o valor development.
+
+- Após este processo, reinicie o computador.

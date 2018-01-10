@@ -1,0 +1,23 @@
+<h3>Resultados das Eleições</h3>
+<div uib-alert class="alert alert-warning" 
+     id="mensagem" ng-if="!vm.resultados">
+  Nenhum recurso disponível no momento!
+</div>
+<div uib-alert class="alert alert-warning" 
+     id="mensagem" ng-if="vm.mensagem">
+  {{vm.mensagem}}
+</div>
+<table class="table">
+<thead>
+  <tr>
+    <th scope="col">Recurso</th>
+    <th scope="col">Total de Votos Recebidos</th>
+  </tr>
+</thead>
+<tbody>
+  <tr ng-repeat="resultado in vm.resultados">
+    <th scope="row">{{resultado.descricao}}</th>
+    <td>{{resultado.totalDeVotos}}</td>
+  </tr> 
+</tbody>
+</table>
